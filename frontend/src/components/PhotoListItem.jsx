@@ -4,13 +4,13 @@ import "../styles/PhotoListItem.scss";
 
 const PhotoListItem = (props) => {
   return (
-    <Fragment>
-      <img src={props.photo.imageSource} />
-      <img src={props.photo.profile} />
-      <p>{props.photo.username}</p>
-      <p>{props.photo.location.city}</p>
-      <p>{props.photo.location.country}</p>
-      </Fragment>
+    <div className="photo-list__item">
+      <img className="photo-list__image" src={props.photo.imageSource} />
+      <img className="photo-list__user-profile" src={props.photo.profile} />
+      <p className="photo-list__user-info">{props.photo.username}</p>
+      <p className="photo-list__user-location">{props.photo.location.city}</p>
+      <p className="photo-list__user-location">{props.photo.location.country}</p>
+      </div>
   )
 };
 
