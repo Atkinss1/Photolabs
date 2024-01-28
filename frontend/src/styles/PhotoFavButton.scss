@@ -1,4 +1,5 @@
 .photo-list__fav-icon {
+  display: flex;
   position: relative;
   top: 8px;
   right: -8px;
@@ -9,10 +10,12 @@
   width: 32px;
   height: 32px;
   text-align: center;
+  justify-content: center;
+  align-items: center;
   border-radius: 100%;
 }
 
 .photo-list__fav-icon-svg {
   padding: 7px;
-  top: 2px;
+  top: 8px;
 }
