@@ -2,7 +2,6 @@ import React from 'react';
 
 import PhotoListItem from './components/PhotoListItem';
 import './App.scss';
-import PhotoFavButton from 'components/PhotoFavButton';
 
 const sampleDataForPhotoListItem = {
   id: "1",
@@ -17,7 +16,6 @@ const sampleDataForPhotoListItem = {
 };
 
 const photos = new Array(3).fill().map((_, index) => ({ ...sampleDataForPhotoListItem, id: index + 1 }));
-console.log(photos);
 
 // Note: Rendering a single component to build components in isolation
 const App = () => {
