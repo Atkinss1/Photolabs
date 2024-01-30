@@ -4,7 +4,7 @@ import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
 
 
-const PhotoListItem = ({photo}) => {
+const PhotoListItem = ({ photo }) => {
 
   const [favorite, setFavorite] = useState(false);
   
