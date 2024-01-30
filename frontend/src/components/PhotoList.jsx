@@ -3,11 +3,11 @@ import "../styles/PhotoList.scss";
 import PhotoListItem from "./PhotoListItem";
 
 
-const PhotoList = ({ photo }) => {
+const PhotoList = ({ photos }) => {
   
   return (
     <ul className="photo-list">
-      {photo.map(photo => {
+      {photos.map(photo => {
        return <PhotoListItem key={photo.id} photo={photo} />
       }) }
     </ul>
