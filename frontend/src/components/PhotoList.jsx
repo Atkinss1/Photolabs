@@ -3,12 +3,12 @@ import "../styles/PhotoList.scss";
 import PhotoListItem from "./PhotoListItem";
 
 
-const PhotoList = ({ photos }) => {
+const PhotoList = ({ photos, onToggleFavorite, isFavorite }) => {
   
   return (
     <ul className="photo-list">
       {photos.map(photo => {
-       return <PhotoListItem key={photo.id} photo={photo} />
+       return <PhotoListItem key={photo.id} photo={photo} onToggleFavorite={onToggleFavorite} isFavorite={isFavorite}/>
       }) }
     </ul>
     );
