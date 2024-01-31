@@ -4,7 +4,7 @@ import '../styles/HomeRoute.scss';
 import TopNavigation from 'components/TopNavigationBar';
 import PhotoList from 'components/PhotoList';
 
-const HomeRoute = ({ photos, topics }) => {
+const HomeRoute = ({ photos, topics, toggleModal }) => {
   const [favorite, setFavorite] = useState([]);
   
   function toggleFavorite(id) {
@@ -21,7 +21,7 @@ const HomeRoute = ({ photos, topics }) => {
   return (
     <div className="home-route">
       <TopNavigation topics={topics} isFavorite={favorite}/>
-      <PhotoList photos={photos} onToggleFavorite={toggleFavorite} isFavorite={favorite} />
+      <PhotoList photos={photos} onToggleFavorite={toggleFavorite} isFavorite={favorite} toggleModal={toggleModal} />
     </div>
   );
 };
