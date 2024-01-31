@@ -4,19 +4,23 @@ import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
 
 
-const PhotoListItem = ({ photo, onToggleFavorite, isFavorite, toggleModal }) => {
-  const modalInfo = { id: photo.id,
-                      location: photo.location,
-                      urls: photo.urls.full,
-                      user: { name: photo.user.name,
-                              profile: photo.user.profile
-                            }
-                    }
+const PhotoListItem = ({ photo, toggleFavorites, favorites, toggleModal }) => {
+  
 
   return (
     <div className="photo-list__item">
-      <PhotoFavButton isFavorite={isFavorite} onToggleFavorite={onToggleFavorite} id={photo.id}/>
-      <img onClick={() => toggleModal(modalInfo)} className="photo-list__image" src={photo.urls.full} />
+      {photo.modal ? (<><PhotoFavButton isFavorite={favorites} toggleFavorites={toggleFavorites} id={photo.id}/>
+      <img onClick={() => toggleModal(photo)} className="photo-details-modal__image" src={photo.urls.full} />
+      <div className='photo-details-modal__photographer-details'>
+        <img className="photo-details-modal__photographer-profile" src={photo.user.profile} />
+        <div className="photo-details-modal__photographer-info">
+          {photo.user.name}
+          <br />
+          <span className="photo-details-modal__photographer-location">{photo.location.city}, {photo.location.country}</span>
+        </div>
+      </div></>) : 
+      (<><PhotoFavButton isFavorite={favorites} toggleFavorites={toggleFavorites} id={photo.id}/>
+      <img onClick={() => toggleModal(photo)} className="photo-list__image" src={photo.urls.full} />
       <div className='photo-list__user-details'>
         <img className="photo-list__user-profile" src={photo.user.profile} />
         <div className="photo-list__user-info">
@@ -24,7 +28,7 @@ const PhotoListItem = ({ photo, onToggleFavorite, isFavorite, toggleModal }) => 
           <br />
           <span className="photo-list__user-location">{photo.location.city}, {photo.location.country}</span>
         </div>
-      </div>
+      </div></>)}
     </div>
   )
 };

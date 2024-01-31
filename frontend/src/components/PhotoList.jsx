@@ -3,13 +3,13 @@ import "../styles/PhotoList.scss";
 import PhotoListItem from "./PhotoListItem";
 
 
-const PhotoList = ({ photos, onToggleFavorite, isFavorite, toggleModal }) => {
+const PhotoList = ({ photos, toggleFavorites, favorites, toggleModal, modalData }) => {
   
   return (
     <ul className="photo-list">
-      {photos.map(photo => {
-       return <PhotoListItem key={photo.id} photo={photo} onToggleFavorite={onToggleFavorite} isFavorite={isFavorite} toggleModal={toggleModal} />
-      }) }
+      { modalData ? (<PhotoListItem photo={modalData} favorites={favorites} toggleFavorites={toggleFavorites}/>) : (photos.map(photo => {
+       return <PhotoListItem key={photo.id} photo={photo} toggleFavorites={toggleFavorites} favorites={favorites} toggleModal={toggleModal} modal />
+      }))}
     </ul>
     );
 };

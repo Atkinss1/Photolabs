@@ -4,24 +4,12 @@ import '../styles/HomeRoute.scss';
 import TopNavigation from 'components/TopNavigationBar';
 import PhotoList from 'components/PhotoList';
 
-const HomeRoute = ({ photos, topics, toggleModal }) => {
-  const [favorite, setFavorite] = useState([]);
-  
-  function toggleFavorite(id) {
-    setFavorite((currentFavorites) => {
-      if (currentFavorites.includes(id)) {
-        return currentFavorites.filter(favoriteId => favoriteId !== id);
-      }
-      else {
-        return [...currentFavorites, id];
-      }
-    })
-  }
+const HomeRoute = ({ photos, topics, toggleModal, modalInfo, favorites, toggleFavorites }) => {
   
   return (
     <div className="home-route">
-      <TopNavigation topics={topics} isFavorite={favorite}/>
-      <PhotoList photos={photos} onToggleFavorite={toggleFavorite} isFavorite={favorite} toggleModal={toggleModal} />
+      <TopNavigation topics={topics} favorites={favorites}/>
+      <PhotoList photos={photos} toggleFavorites={toggleFavorites} favorites={favorites} toggleModal={toggleModal} modalInfo={modalInfo} />
     </div>
   );
 };

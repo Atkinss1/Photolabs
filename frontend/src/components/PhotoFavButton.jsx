@@ -3,11 +3,11 @@ import React, { useCallback, useState } from 'react';
 import FavIcon from './FavIcon';
 import '../styles/PhotoFavButton.scss';
 
-function PhotoFavButton({ id, isFavorite, onToggleFavorite}) {
+function PhotoFavButton({ id, isFavorite, toggleFavorites}) {
   
   return (
-    <div onClick={() => onToggleFavorite(id)} className="photo-list__fav-icon">
-      {isFavorite.includes(id) ? (
+    <div onClick={() => toggleFavorites(id)} className="photo-list__fav-icon">
+      {Array.isArray(isFavorite) && isFavorite.includes(id) ? (
         <div className="photo-list__fav-icon-svg">
           <FavIcon selected={true} />
         </div>

@@ -8,17 +8,33 @@ import PhotoDetailsModal from 'routes/PhotoDetailsModal';
 
 // Note: Rendering a single component to build components in isolation
 const App = () => {
-
-  const [selectedPhoto, setSelectedPhoto] = useState(0);
+  const [favorites, setFavorite] = useState([]);
+  
+  function toggleFavorites(id) {
+    setFavorite((currentFavorites) => {
+      if (currentFavorites.includes(id)) {
+        return currentFavorites.filter(favoriteId => favoriteId !== id);
+      }
+      else {
+        return [...currentFavorites, id];
+      }
+    })
+  }
+  
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
 
   const toggleModal = (props) => {
-    selectedPhoto ? setSelectedPhoto(0) : setSelectedPhoto(props);
+    const modalProps = {
+      ...props,
+      modal: true,
+    }
+    selectedPhoto ? setSelectedPhoto(null) : setSelectedPhoto(modalProps);
   }
   
   return (
     <div className="App">
-        <HomeRoute photos={photos} topics={topics} toggleModal={toggleModal} />
-        {selectedPhoto && <PhotoDetailsModal closeDisplayModal={toggleModal} modalInfo={selectedPhoto}/>}
+        <HomeRoute photos={photos} topics={topics} toggleModal={toggleModal} favorites={favorites} toggleFavorites={toggleFavorites} />
+        {selectedPhoto && <PhotoDetailsModal closeDisplayModal={toggleModal} modalData={selectedPhoto} toggleFavorites={toggleFavorites} favorites={favorites} />}
     </div>
   );
 };
