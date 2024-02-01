@@ -33,8 +33,16 @@ const App = () => {
   
   return (
     <div className="App">
-        <HomeRoute photos={photos} topics={topics} toggleModal={toggleModal} favorites={favorites} toggleFavorites={toggleFavorites} />
-        {selectedPhoto && <PhotoDetailsModal closeDisplayModal={toggleModal} modalData={selectedPhoto} toggleFavorites={toggleFavorites} favorites={favorites} />}
+        <HomeRoute photos={photos} 
+                   topics={topics}
+                   toggleModal={toggleModal}
+                   favorites={favorites}
+                   toggleFavorites={toggleFavorites} />
+        {selectedPhoto && 
+        <PhotoDetailsModal closeDisplayModal={toggleModal}
+                           modalData={selectedPhoto}
+                           toggleFavorites={toggleFavorites}
+                           favorites={favorites} />}
     </div>
   );
 };

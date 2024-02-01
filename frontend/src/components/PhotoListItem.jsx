@@ -4,7 +4,7 @@ import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
 
 
-const PhotoListItem = ({ photo, toggleFavorites, favorites, toggleModal }) => {
+const PhotoListItem = ({similarPhoto, photo, toggleFavorites, favorites, toggleModal }) => {
   
 
   return (
@@ -18,7 +18,11 @@ const PhotoListItem = ({ photo, toggleFavorites, favorites, toggleModal }) => {
           <br />
           <span className="photo-details-modal__photographer-location">{photo.location.city}, {photo.location.country}</span>
         </div>
-      </div></>) : 
+      </div>
+      <div>
+      similar photos
+      </div>
+      <img src={similarPhoto} className="photo-details-modal__images" /></>) : 
       (<><PhotoFavButton isFavorite={favorites} toggleFavorites={toggleFavorites} id={photo.id}/>
       <img onClick={() => toggleModal(photo)} className="photo-list__image" src={photo.urls.full} />
       <div className='photo-list__user-details'>
