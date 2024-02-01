@@ -40,9 +40,10 @@ const App = () => {
                    toggleFavorites={toggleFavorites} />
         {selectedPhoto && 
         <PhotoDetailsModal closeDisplayModal={toggleModal}
-                           modalData={selectedPhoto}
+                           selectedPhoto={selectedPhoto}
                            toggleFavorites={toggleFavorites}
-                           favorites={favorites} />}
+                           favorites={favorites}
+                           toggleModal={toggleModal} />}
     </div>
   );
 };
