@@ -9,12 +9,31 @@
   width: 55%;
   overflow-y: scroll;
   border-radius: 12px;
+  background: rgba(255, 255, 255, 0.48);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(13.1px);
+  -webkit-backdrop-filter: blur(13.1px);
+  border: 1px solid rgba(255, 255, 255, 0.58);
+  animation: fade-in .5s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .photo-details-modal__close-button {
-  background-color: white;
-  border: none;
-  color: white;
+  background: rgba(255, 255, 255, 0.48);
+  border-radius: 6px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(13.1px);
+  -webkit-backdrop-filter: blur(13.1px);
+  border: 1px solid rgba(255, 255, 255, 0.58);
   text-align: center;
   text-decoration: none;
   display: inline-block;

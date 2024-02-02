@@ -8,7 +8,8 @@ const FavBadge = ({ favorites }) => {
   return (
     <div className='fav-badge'>
       { hasFavorites ?
-      (<FavIcon displayAlert={hasFavorites} selected={true}  />) :
+      (<FavIcon displayAlert={hasFavorites}
+                selected={true}  />) :
       (<FavIcon />) }
     </div>
   ) 

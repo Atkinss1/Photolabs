@@ -14,14 +14,22 @@ const PhotoDetailsModal = ({ closeDisplayModal, selectedPhoto, toggleFavorites, 
     <div className="photo-details-modal">
 
         <div className='photo-details-modal__top-bar'>
+          
           < button className="photo-details-modal__close-button" onClick={closeDisplayModal}>
+            
             <img src={closeSymbol} alt="close symbol" />
+          
           </button >
+        
         </div>
 
         <div className='photo-details-modal__images'>
-          <PhotoFavButton isFavorite={favorites} toggleFavorites={toggleFavorites} id={selectedPhoto.id} />
+          <PhotoFavButton favorites={favorites}
+                          toggleFavorites={toggleFavorites}
+                          id={selectedPhoto.id} />
+          
           <img className='photo-details-modal__image' src={selectedPhoto.urls.regular} />
+          
           <div className='photo-details-modal__photographer-details'>
             <img className='photo-details-modal__photographer-profile' src={selectedPhoto.user.profile} />
             <div className='photo-details-modal__photographer-info'>
@@ -31,20 +39,18 @@ const PhotoDetailsModal = ({ closeDisplayModal, selectedPhoto, toggleFavorites, 
               </div>
             </div>
           </div>
+                
         </div>
-
+              
         <br></br>
 
         <div className='photo-details-modal__images'>
           <strong>Similar Photos</strong>
           <div>
-            <PhotoList
-              photos={similarPhotos}
-              favorites={favorites}
-              toggleFavorites={toggleFavorites}
-              toggleModal={toggleModal}
-              
-            />
+            <PhotoList photos={similarPhotos}
+                       favorites={favorites}
+                       toggleFavorites={toggleFavorites}
+                       toggleModal={toggleModal} />
           </div>
         </div>
       </div >
@@ -52,4 +58,15 @@ const PhotoDetailsModal = ({ closeDisplayModal, selectedPhoto, toggleFavorites, 
 };
 
 export default PhotoDetailsModal;
+              
+            
+        
+              
+          
+          
+      
+              
+            
+
+
 

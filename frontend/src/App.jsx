@@ -1,36 +1,21 @@
-import React, { useState } from 'react';
-import './App.scss';
-import HomeRoute from 'routes/HomeRoute';
+import React from 'react';
 import photos from 'mocks/photos';
 import topics from 'mocks/topics';
+import HomeRoute from 'routes/HomeRoute';
 import PhotoDetailsModal from 'routes/PhotoDetailsModal';
+import './App.scss';
+import { useApplicationData } from 'hooks/useApplicationData';
 
 
 // Note: Rendering a single component to build components in isolation
 const App = () => {
-  const [favorites, setFavorite] = useState([]);
-  
-  function toggleFavorites(id) {
-    setFavorite((currentFavorites) => {
-      if (currentFavorites.includes(id)) {
-        return currentFavorites.filter(favoriteId => favoriteId !== id);
-      }
-      else {
-        return [...currentFavorites, id];
-      }
-    })
-  }
-  
-  const [selectedPhoto, setSelectedPhoto] = useState(null);
 
-  const toggleModal = (props) => {
-    const modalProps = {
-      ...props,
-      modal: true,
-    }
-    selectedPhoto ? setSelectedPhoto(null) : setSelectedPhoto(modalProps);
-  }
-  
+  const { toggleFavorites,
+          toggleModal,
+          favorites,
+          selectedPhoto,
+        } = useApplicationData();
+
   return (
     <div className="App">
         <HomeRoute photos={photos} 

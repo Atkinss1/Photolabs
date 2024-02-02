@@ -8,8 +8,14 @@ const HomeRoute = ({ photos, topics, toggleModal, modalInfo, favorites, toggleFa
   
   return (
     <div className="home-route">
-      <TopNavigation topics={topics} favorites={favorites}/>
-      <PhotoList photos={photos} toggleFavorites={toggleFavorites} favorites={favorites} toggleModal={toggleModal} modalInfo={modalInfo} />
+      <TopNavigation topics={topics}
+                     favorites={favorites} />
+
+      <PhotoList photos={photos}
+                 toggleFavorites={toggleFavorites}
+                 favorites={favorites}
+                 toggleModal={toggleModal}
+                 modalInfo={modalInfo} />
     </div>
   );
 };

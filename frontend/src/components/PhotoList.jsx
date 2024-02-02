@@ -8,9 +8,17 @@ const PhotoList = ({ photos, toggleFavorites, favorites, toggleModal, similarPho
   return (
     <ul className="photo-list">
       { similarPhotos ? (similarPhotos.map(photos => {
-        return <PhotoListItem key={photos.id} photo={photos} toggleFavorites={toggleFavorites} favorites={favorites} toggleModal={toggleModal} />
+        return <PhotoListItem key={photos.id}
+                              photo={photos}
+                              toggleFavorites={toggleFavorites}
+                              favorites={favorites}
+                              toggleModal={toggleModal} />
       })) : (photos.map(photo => {
-       return <PhotoListItem key={photo.id} photo={photo} toggleFavorites={toggleFavorites} favorites={favorites} toggleModal={toggleModal} modal />
+       return <PhotoListItem key={photo.id}
+                             photo={photo}
+                             toggleFavorites={toggleFavorites}
+                             favorites={favorites}
+                             toggleModal={toggleModal} />
       }))}
     </ul>
     );
