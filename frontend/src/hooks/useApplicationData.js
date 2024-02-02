@@ -49,7 +49,6 @@ export const useApplicationData =() => {
     }
     
     const toggleModal = (props) => {
-      console.log('this is props', props);
       if (props === undefined) {
         dispatch({type: ACTIONS.CLOSE_MODAL, payload: false});
       } else {
