@@ -3,6 +3,8 @@ import FavIcon from './FavIcon';
 
 import '../styles/FavBadge.scss';
 
+// Rendering Icon dependent on state
+
 const FavBadge = ({ favorites }) => {
   const hasFavorites = favorites.length !== 0;
   return (

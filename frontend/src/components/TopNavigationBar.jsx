@@ -3,6 +3,8 @@ import TopicList from './TopicList';
 import '../styles/TopNavigationBar.scss'
 import FavBadge from './FavBadge';
 
+// Rendering Topics in header
+
 const TopNavigation = ({ topics, favorites, photosByTopic}) => {
 
   return (

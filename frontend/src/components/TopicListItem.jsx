@@ -2,6 +2,8 @@ import React from "react";
 
 import "../styles/TopicListItem.scss";
 
+// Render Each Topic
+
 const TopicListItem = ({id, title, photosByTopic }) => {
 
   return (

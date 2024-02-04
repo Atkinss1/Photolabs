@@ -4,8 +4,8 @@ import PhotoDetailsModal from 'routes/PhotoDetailsModal';
 import './App.scss';
 import { useApplicationData } from 'hooks/useApplicationData';
 
+// Rendering Home Page || Modal If User Has Selected A Photo
 
-// Note: Rendering a single component to build components in isolation
 const App = () => {
 
   const { toggleFavorites,

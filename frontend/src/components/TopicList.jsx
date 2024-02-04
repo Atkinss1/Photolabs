@@ -2,6 +2,8 @@ import React from "react";
 import TopicListItem from "./TopicListItem";
 import "../styles/TopicList.scss";
 
+// Rendering a list of individual TopicListItem Components
+
 const TopicList = ({ topics, photosByTopic }) => {
   
   return (

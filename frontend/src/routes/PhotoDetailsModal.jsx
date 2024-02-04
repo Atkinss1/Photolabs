@@ -1,16 +1,31 @@
-import React, { useEffect } from 'react';
-
+import React, { useEffect, useRef } from 'react';
 import '../styles/PhotoDetailsModal.scss'
 import closeSymbol from '../assets/closeSymbol.svg';
 import PhotoList from 'components/PhotoList';
 import PhotoFavButton from 'components/PhotoFavButton';
 
+// Renders Layout In Modal Window
+
 const PhotoDetailsModal = ({ selectedPhoto, toggleFavorites, favorites, toggleModal }) => {
   
+  // Referencing the modal window
+
+  const modalRef = useRef(null);
+  
+  // If the selected photo has changed, scroll to top of modal window 
+
+  useEffect(() => {
+    if (modalRef.current) {
+      modalRef.current.scrollTop = 0;
+    }
+  }, [selectedPhoto])
+
+    // Converting object of objects into an array for processing
+
     const similarPhotos = selectedPhoto.similar_photos ? Object.values(selectedPhoto.similar_photos) : []
 
     return (
-      <div className="photo-details-modal">
+      <div ref={modalRef} className="photo-details-modal">
 
         <div className='photo-details-modal__top-bar'>
           

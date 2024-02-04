@@ -1,4 +1,4 @@
-import { useReducer, useEffect } from "react";
+import { useReducer, useEffect, useRef } from "react";
 import axios from "axios";
 
 const initialState = {
@@ -92,6 +92,13 @@ export const useApplicationData =() => {
      getTopics();
   }, [])
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 100,
+      behavior: "auto"
+    });
+  }, [state.selectedPhoto])
+
   async function photosByTopic(id) {
     try {
       const response = await axios.get(`/api/topics/photos/${id}`);
@@ -115,7 +122,8 @@ export const useApplicationData =() => {
     if (props === undefined) {
       dispatch({type: ACTIONS.CLOSE_MODAL, payload: false});
     } else {
-      dispatch({type: ACTIONS.OPEN_MODAL, payload: props});
+      const selectedPhoto = state.photoData.filter(photo => photo.id === props.id)
+      dispatch({type: ACTIONS.OPEN_MODAL, payload: selectedPhoto[0]});
     }
   }
     

@@ -1,8 +1,8 @@
 import React from "react";
-
 import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
 
+// Rendering Each Photo
 
 const PhotoListItem = ({ photo, toggleFavorites, favorites, toggleModal }) => {
 
