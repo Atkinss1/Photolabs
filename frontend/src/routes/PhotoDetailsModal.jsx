@@ -10,13 +10,16 @@ const PhotoDetailsModal = ({ selectedPhoto, toggleFavorites, favorites, toggleMo
   
   // Referencing the modal window
 
-  const modalRef = useRef(null);
+  const modalWindowRef = useRef(null);
   
   // If the selected photo has changed, scroll to top of modal window 
 
   useEffect(() => {
-    if (modalRef.current) {
-      modalRef.current.scrollTop = 0;
+    if (modalWindowRef.current) {
+      modalWindowRef.current.scrollTo({
+        top: 0,
+        behavior: "auto"
+      });
     }
   }, [selectedPhoto])
 
@@ -25,7 +28,7 @@ const PhotoDetailsModal = ({ selectedPhoto, toggleFavorites, favorites, toggleMo
     const similarPhotos = selectedPhoto.similar_photos ? Object.values(selectedPhoto.similar_photos) : []
 
     return (
-      <div ref={modalRef} className="photo-details-modal">
+      <div ref={modalWindowRef} className={'photo-details-modal'}>
 
         <div className='photo-details-modal__top-bar'>
           

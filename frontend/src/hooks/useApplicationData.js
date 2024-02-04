@@ -14,8 +14,8 @@ const ACTIONS = {
   FAV_PHOTO_REMOVED: 'FAV_PHOTO_REMOVED',
   SET_PHOTO_DATA: 'SET_PHOTO_DATA',
   SET_TOPIC_DATA: 'SET_TOPIC_DATA',
-  OPEN_MODAL: 'OPEN_MODAL',
   DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS',
+  OPEN_MODAL: 'OPEN_MODAL',
   CLOSE_MODAL: 'CLOSE_MODAL',
   GET_PHOTOS_BY_TOPICS: 'GET_PHOTOS_BY_TOPICS'
 }
@@ -97,7 +97,8 @@ export const useApplicationData =() => {
       top: 100,
       behavior: "auto"
     });
-  }, [state.selectedPhoto])
+  }, [state.selectedPhoto]
+  )
 
   async function photosByTopic(id) {
     try {
@@ -121,9 +122,21 @@ export const useApplicationData =() => {
   function toggleModal(props) {
     if (props === undefined) {
       dispatch({type: ACTIONS.CLOSE_MODAL, payload: false});
+      
+      // If modal isn't opened, allow scrolling
+      
+      if (typeof window !== 'undefined' && window.document) {
+        document.body.style.overflow = 'visible';
+      }
     } else {
       const selectedPhoto = state.photoData.filter(photo => photo.id === props.id)
       dispatch({type: ACTIONS.OPEN_MODAL, payload: selectedPhoto[0]});
+
+      // If modal is open, disable scrolling
+
+      if (typeof window !== 'undefined' && window.document) {
+        document.body.style.overflow = 'hidden';
+      }
     }
   }
     

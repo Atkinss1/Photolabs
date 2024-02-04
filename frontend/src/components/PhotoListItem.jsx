@@ -1,14 +1,15 @@
 import React from "react";
 import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
+import { useApplicationData } from "hooks/useApplicationData";
 
 // Rendering Each Photo
 
-const PhotoListItem = ({ photo, toggleFavorites, favorites, toggleModal }) => {
+const PhotoListItem = ({ photo, toggleFavorites, favorites, toggleModal, disableClick }) => {
 
+  const { state } = useApplicationData();
   const { id, urls, user, location } = photo;
   
-
   return (
     <div className="photo-list__item">
       
@@ -16,7 +17,7 @@ const PhotoListItem = ({ photo, toggleFavorites, favorites, toggleModal }) => {
                       toggleFavorites={toggleFavorites}
                       id={id} />
       
-      <img className="photo-list__image" onClick={() => toggleModal(photo)}  src={urls.full} />
+      <img className="photo-list__image" onClick={() => !disableClick && toggleModal(photo)}  src={urls.full} />
       
       <div className='photo-list__user-details'>
         <img className="photo-list__user-profile" src={user.profile} />
