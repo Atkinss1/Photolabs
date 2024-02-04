@@ -1,6 +1,4 @@
 import React from 'react';
-import photos from 'mocks/photos';
-import topics from 'mocks/topics';
 import HomeRoute from 'routes/HomeRoute';
 import PhotoDetailsModal from 'routes/PhotoDetailsModal';
 import './App.scss';
@@ -17,8 +15,8 @@ const App = () => {
 
   return (
     <div className="App">
-        <HomeRoute photos={photos} 
-                   topics={topics}
+        <HomeRoute photos={state.photoData} 
+                   topics={state.topicData}
                    toggleModal={toggleModal}
                    favorites={state.favorites}
                    toggleFavorites={toggleFavorites} />

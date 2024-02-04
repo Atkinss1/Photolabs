@@ -1,8 +1,12 @@
-import { useReducer } from "react";
+import { useReducer, useEffect } from "react";
+import axios from "axios";
 
-const initialState = {favorites: [],
+const initialState = {
+  favorites: [],
   selectedPhoto: null,
-  displayModal: false 
+  displayModal: false ,
+  photoData: [],
+  topicData: []
 }
 
 const ACTIONS = {
@@ -19,25 +23,70 @@ function reducer(state, action) {
 
   switch (action.type) {
     case ACTIONS.FAV_PHOTO_ADDED:
-      return {...state, favorites: [...state.favorites, action.payload]}
+      return {
+        ...state,
+         favorites: [...state.favorites, action.payload]
+        }
     case ACTIONS.FAV_PHOTO_REMOVED:
-      return {...state, favorites: state.favorites.filter(favoriteId => favoriteId !== action.payload)
+      return {
+        ...state,
+         favorites: state.favorites.filter(favoriteId => favoriteId !== action.payload)
         }
     case ACTIONS.OPEN_MODAL:
-      return {...state, displayModal: true, selectedPhoto: action.payload}
+      return {
+        ...state,
+         displayModal: true, selectedPhoto: action.payload
+        }
     case ACTIONS.CLOSE_MODAL:
-      return {...state, displayModal: false}
-        
-        default:
-          throw new Error(
-            `Tried to reduce with unsupported action type: ${action.type}`
-            );
-    }
+      return {...state,
+         displayModal: false
+        }
+    case ACTIONS.SET_PHOTO_DATA:
+      return {
+        ...state,
+        photoData: action.payload
+      }
+    case ACTIONS.SET_TOPIC_DATA:
+      return {
+        ...state,
+        topicData: action.payload
+      }
+      default:
+        throw new Error(
+          `Tried to reduce with unsupported action type: ${action.type}`
+          );
   }
+}
 
 export const useApplicationData =() => {
 
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+     async function getPhotos() {
+      try {
+        const response = await axios.get('/api/photos');
+        dispatch({type: ACTIONS.SET_PHOTO_DATA, payload: response.data});
+      } catch (error) {
+        console.error(error);
+      }
+     }
+
+     async function getTopics() {
+      try {
+        const response = await axios.get('/api/topics');
+        dispatch({type: ACTIONS.SET_TOPIC_DATA, payload: response.data});
+      }
+      catch (error) {
+        console.error(error);
+      }
+     }
+
+     getPhotos();
+     getTopics();
+  }, [])
+
+
   
   function toggleFavorites(id) {
       if (state.favorites.includes(id)) {

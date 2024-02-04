@@ -1,20 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import '../styles/PhotoDetailsModal.scss'
 import closeSymbol from '../assets/closeSymbol.svg';
 import PhotoList from 'components/PhotoList';
 import PhotoFavButton from 'components/PhotoFavButton';
 
-const PhotoDetailsModal = ({ closeDisplayModal, selectedPhoto, toggleFavorites, favorites, toggleModal }) => {
+const PhotoDetailsModal = ({ selectedPhoto, toggleFavorites, favorites, toggleModal }) => {
   
-    const similarPhotos = selectedPhoto.similar_photos ? Object.values(selectedPhoto.similar_photos) : [] 
-     
+    const similarPhotos = selectedPhoto.similar_photos ? Object.values(selectedPhoto.similar_photos) : []
+
     return (
       <div className="photo-details-modal">
 
         <div className='photo-details-modal__top-bar'>
           
-          < button className="photo-details-modal__close-button" onClick={()=> closeDisplayModal()}>
+          < button className="photo-details-modal__close-button" onClick={()=> toggleModal()}>
             
             <img src={closeSymbol} alt="close symbol" />
           
