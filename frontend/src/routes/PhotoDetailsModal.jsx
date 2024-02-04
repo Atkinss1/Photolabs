@@ -30,13 +30,16 @@ const PhotoDetailsModal = ({ selectedPhoto, toggleFavorites, favorites, toggleMo
           <img className='photo-details-modal__image' src={selectedPhoto.urls.regular} />
           
           <div className='photo-details-modal__photographer-details'>
+            
             <img className='photo-details-modal__photographer-profile' src={selectedPhoto.user.profile} />
+            
             <div className='photo-details-modal__photographer-info'>
               <span>{selectedPhoto.user.name}</span>
               <div className="photo-details-modal__photographer-location">
                 <span>{selectedPhoto.location.city}, {selectedPhoto.location.country}</span>
               </div>
             </div>
+          
           </div>
                 
         </div>
@@ -44,8 +47,10 @@ const PhotoDetailsModal = ({ selectedPhoto, toggleFavorites, favorites, toggleMo
         <br></br>
 
         <div className='photo-details-modal__images'>
+          
           <strong>Similar Photos</strong>
           <div>
+            
             <PhotoList photos={similarPhotos}
                        favorites={favorites}
                        toggleFavorites={toggleFavorites}

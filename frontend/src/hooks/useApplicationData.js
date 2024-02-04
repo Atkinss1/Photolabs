@@ -111,18 +111,18 @@ export const useApplicationData =() => {
       }
     }
     
-    const toggleModal = (props) => {
-      if (props === undefined) {
-        dispatch({type: ACTIONS.CLOSE_MODAL, payload: false});
-      } else {
-        dispatch({type: ACTIONS.OPEN_MODAL, payload: props});
-      }
+  function toggleModal(props) {
+    if (props === undefined) {
+      dispatch({type: ACTIONS.CLOSE_MODAL, payload: false});
+    } else {
+      dispatch({type: ACTIONS.OPEN_MODAL, payload: props});
     }
-    
-    return { 
-      toggleFavorites,
-      toggleModal,
-      photosByTopic,
-      state
-    };
   }
+    
+  return { 
+    toggleFavorites,
+    toggleModal,
+    photosByTopic,
+    state
+  };
+}
