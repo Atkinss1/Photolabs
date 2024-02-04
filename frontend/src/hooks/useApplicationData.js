@@ -6,7 +6,7 @@ const initialState = {
   selectedPhoto: null,
   displayModal: false ,
   photoData: [],
-  topicData: []
+  topicData: [],
 }
 
 const ACTIONS = {
@@ -16,7 +16,8 @@ const ACTIONS = {
   SET_TOPIC_DATA: 'SET_TOPIC_DATA',
   OPEN_MODAL: 'OPEN_MODAL',
   DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS',
-  CLOSE_MODAL: 'CLOSE_MODAL'
+  CLOSE_MODAL: 'CLOSE_MODAL',
+  GET_PHOTOS_BY_TOPICS: 'GET_PHOTOS_BY_TOPICS'
 }
 
 function reducer(state, action) {
@@ -50,6 +51,11 @@ function reducer(state, action) {
       return {
         ...state,
         topicData: action.payload
+      }
+    case ACTIONS.GET_PHOTOS_BY_TOPICS:
+      return {
+        ...state,
+        photoData: action.payload
       }
       default:
         throw new Error(
@@ -86,7 +92,15 @@ export const useApplicationData =() => {
      getTopics();
   }, [])
 
-
+  async function photosByTopic(id) {
+    try {
+      const response = await axios.get(`/api/topics/photos/${id}`);
+      dispatch({type: ACTIONS.GET_PHOTOS_BY_TOPICS, payload: response.data});   
+    }
+    catch (error) {
+      console.error(error);
+    }
+  }
   
   function toggleFavorites(id) {
       if (state.favorites.includes(id)) {
@@ -108,6 +122,7 @@ export const useApplicationData =() => {
     return { 
       toggleFavorites,
       toggleModal,
+      photosByTopic,
       state
     };
   }
