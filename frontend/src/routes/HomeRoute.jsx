@@ -3,15 +3,11 @@ import React from 'react';
 import '../styles/HomeRoute.scss';
 import TopNavigation from 'components/TopNavigationBar';
 import PhotoList from 'components/PhotoList';
-import { useApplicationData } from 'hooks/useApplicationData';
 
 // Rendering Home Page
 
-const HomeRoute = ({ photos, topics, toggleModal, modalInfo, favorites, toggleFavorites, photosByTopic, disableClick }) => {
+const HomeRoute = ({ photos, topics, toggleModal, modalInfo, favorites, toggleFavorites, photosByTopic, disableBackgroundClick }) => {
 
-  const {
-    state
-  } = useApplicationData();
   
   return (
     <div className="home-route">
@@ -24,7 +20,7 @@ const HomeRoute = ({ photos, topics, toggleModal, modalInfo, favorites, toggleFa
                  favorites={favorites}
                  toggleModal={toggleModal}
                  modalInfo={modalInfo}
-                 disableClick={disableClick} />
+                 disableBackgroundClick={disableBackgroundClick} />
     </div>
   );
 };

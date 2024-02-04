@@ -4,7 +4,7 @@ import PhotoListItem from "./PhotoListItem";
 
 // Rendering individual PhotoListItem Components
 
-const PhotoList = ({ photos, toggleFavorites, favorites, toggleModal, disableClick }) => {
+const PhotoList = ({ photos, toggleFavorites, favorites, toggleModal, disableBackgroundClick }) => {
   
   return (
     <ul className="photo-list">
@@ -14,7 +14,7 @@ const PhotoList = ({ photos, toggleFavorites, favorites, toggleModal, disableCli
                              toggleFavorites={toggleFavorites}
                              favorites={favorites}
                              toggleModal={toggleModal}
-                             disableClick={disableClick} />
+                             disableBackgroundClick={disableBackgroundClick} />
       })}
     </ul>
     );

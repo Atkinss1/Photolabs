@@ -13,7 +13,6 @@ const App = () => {
           photosByTopic,
           state
         } = useApplicationData();
-        console.log(state.displayModal);
 
   return (
     <div className="App">
@@ -23,7 +22,7 @@ const App = () => {
                    favorites={state.favorites}
                    toggleFavorites={toggleFavorites}
                    photosByTopic={photosByTopic}
-                   disableClick={state.displayModal} />
+                   disableBackgroundClick={state.displayModal} />
         {state.displayModal &&
         <PhotoDetailsModal closeDisplayModal={toggleModal}
                            selectedPhoto={state.selectedPhoto}
