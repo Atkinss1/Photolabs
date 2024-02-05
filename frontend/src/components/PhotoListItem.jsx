@@ -13,7 +13,7 @@ const PhotoListItem = ({ photo, toggleFavorites, favorites, toggleModal, disable
       
       <PhotoFavButton favorites={favorites}
                       toggleFavorites={toggleFavorites}
-                      id={id} />
+                      photo={photo} />
 
       <img className="photo-list__image" onClick={() => !disableBackgroundClick && toggleModal(photo)}  src={urls.full} />
       

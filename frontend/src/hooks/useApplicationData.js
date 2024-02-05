@@ -3,10 +3,10 @@ import axios from "axios";
 
 const initialState = {
   favorites: [],
+  hasFavorites: false,
   selectedPhoto: null,
   displayModal: false ,
   photoData: [],
-  favoritesData: [],
   topicData: []
 }
 
@@ -19,7 +19,8 @@ const ACTIONS = {
   OPEN_MODAL: 'OPEN_MODAL',
   CLOSE_MODAL: 'CLOSE_MODAL',
   GET_PHOTOS_BY_TOPICS: 'GET_PHOTOS_BY_TOPICS',
-  DISPLAY_FAVORITE_PHOTOS: 'DISPLAY_FAVORITE_PHOTOS'
+  DISPLAY_FAVORITE_PHOTOS: 'DISPLAY_FAVORITE_PHOTOS',
+  UPDATE_HAS_FAVORITE_STATE: 'UPDATE_HAS_FAVORITE_STATE'
 }
 
 function reducer(state, action) {
@@ -33,7 +34,7 @@ function reducer(state, action) {
     case ACTIONS.FAV_PHOTO_REMOVED:
       return {
         ...state,
-         favorites: state.favorites.filter(favoriteId => favoriteId !== action.payload)
+         favorites: state.favorites.filter(favorite => favorite !== action.payload)
         }
     case ACTIONS.OPEN_MODAL:
       return {
@@ -62,8 +63,12 @@ function reducer(state, action) {
     case ACTIONS.DISPLAY_FAVORITE_PHOTOS:
       return {
         ...state,
-        photoData: action.payload
+        favorites: action.payload
       }
+    case ACTIONS.UPDATE_HAS_FAVORITE_STATE:
+      return {...state,
+      hasFavorites: action.payload
+    }
       default:
         throw new Error(
           `Tried to reduce with unsupported action type: ${action.type}`
@@ -111,6 +116,7 @@ export const useApplicationData =() => {
     try {
       const response = await axios.get('/api/photos');
       dispatch({type: ACTIONS.SET_PHOTO_DATA, payload: response.data});
+      dispatch({type: ACTIONS.UPDATE_HAS_FAVORITE_STATE, payload: false});
     } catch (error) {
       console.error(error);
     }
@@ -126,12 +132,15 @@ export const useApplicationData =() => {
     }
   }
   
-  function toggleFavorites(id) {
-      if (state.favorites.includes(id)) {
-        dispatch({type: ACTIONS.FAV_PHOTO_REMOVED, payload: id});
-      }
-      else {
-        dispatch({type: ACTIONS.FAV_PHOTO_ADDED, payload: id});
+  function toggleFavorites(photo) {
+
+      if (state.favorites.includes(photo)) {
+        dispatch({type: ACTIONS.FAV_PHOTO_REMOVED, payload: photo});
+        if (state.favorites.length <= 1) {
+          dispatch({type: ACTIONS.UPDATE_HAS_FAVORITE_STATE, payload: false});
+        }
+      } else {
+        dispatch({type: ACTIONS.FAV_PHOTO_ADDED, payload: photo});
       }
     }
     
@@ -156,10 +165,10 @@ export const useApplicationData =() => {
     }
   }
 
-  function displayFavoritePhotos() {
+  function displayFavorites() {
     if (state.favorites.length > 0) {
-      const filteredFavorites = state.photoData.filter(photo => state.favorites.includes(photo.id));
-      dispatch({type: ACTIONS.DISPLAY_FAVORITE_PHOTOS, payload: filteredFavorites});
+      dispatch({type: ACTIONS.UPDATE_HAS_FAVORITE_STATE, payload: true});
+      dispatch({type: ACTIONS.DISPLAY_FAVORITE_PHOTOS, payload: state.favorites});
     }
   }
 
@@ -168,8 +177,8 @@ export const useApplicationData =() => {
     toggleFavorites,
     toggleModal,
     photosByTopic,
-    displayFavoritePhotos,
     returnHome,
+    displayFavorites,
     state
   };
 }

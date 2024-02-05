@@ -5,7 +5,7 @@ import PhotoListItem from "./PhotoListItem";
 // Rendering individual PhotoListItem Components
 
 const PhotoList = ({ photos, toggleFavorites, favorites, toggleModal, disableBackgroundClick }) => {
-  
+
   return (
     <ul className="photo-list">
       {photos.map(photo => {

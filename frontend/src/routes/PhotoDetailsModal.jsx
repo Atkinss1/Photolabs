@@ -7,7 +7,6 @@ import PhotoFavButton from 'components/PhotoFavButton';
 // Renders Layout In Modal Window
 
 const PhotoDetailsModal = ({ selectedPhoto, toggleFavorites, favorites, toggleModal }) => {
-  
   // Referencing the modal window
 
   const modalWindowRef = useRef(null);
@@ -43,7 +42,7 @@ const PhotoDetailsModal = ({ selectedPhoto, toggleFavorites, favorites, toggleMo
         <div className='photo-details-modal__images'>
           <PhotoFavButton favorites={favorites}
                           toggleFavorites={toggleFavorites}
-                          id={selectedPhoto.id} />
+                          photo={selectedPhoto} />
           
           <img className='photo-details-modal__image' src={selectedPhoto.urls.regular} />
           

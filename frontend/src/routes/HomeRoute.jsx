@@ -6,16 +6,15 @@ import PhotoList from 'components/PhotoList';
 
 // Rendering Home Page
 
-const HomeRoute = ({ photos, topics, toggleModal, modalInfo, favorites, toggleFavorites, photosByTopic, disableBackgroundClick, displayFavoritePhotos, returnHome }) => {
-
+const HomeRoute = ({ photos, topics, toggleModal, modalInfo, favorites, toggleFavorites, photosByTopic, disableBackgroundClick, returnHome, displayFavorites }) => {
   
   return (
     <div className="home-route">
       <TopNavigation topics={topics}
                      favorites={favorites}
                      photosByTopic={photosByTopic}
-                     displayFavoritePhotos={displayFavoritePhotos}
-                     returnHome={returnHome} />
+                     returnHome={returnHome}
+                     displayFavorites={displayFavorites} />
 
       <PhotoList photos={photos}
                  toggleFavorites={toggleFavorites}
