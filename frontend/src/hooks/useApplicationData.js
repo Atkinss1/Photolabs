@@ -145,6 +145,7 @@ export const useApplicationData =() => {
     }
     
   function toggleModal(props) {
+    console.log('this is props', props)
     if (props === undefined) {
       dispatch({type: ACTIONS.CLOSE_MODAL, payload: false});
       
@@ -154,7 +155,10 @@ export const useApplicationData =() => {
         document.body.style.overflow = 'visible';
       }
     } else {
-      const selectedPhoto = state.photoData.filter(photo => photo.id === props.id)
+      const selectedPhoto = state.hasFavorites ?  
+      ( state.favorites.filter(photo => photo.id === props.id)) :
+      ( state.photoData.filter(photo => photo.id === props.id));
+      console.log('selectedPhoto', selectedPhoto[0]);
       dispatch({type: ACTIONS.OPEN_MODAL, payload: selectedPhoto[0]});
 
       // If modal is open, disable scrolling
