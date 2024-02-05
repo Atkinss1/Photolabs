@@ -6,7 +6,8 @@ const initialState = {
   selectedPhoto: null,
   displayModal: false ,
   photoData: [],
-  topicData: [],
+  favoritesData: [],
+  topicData: []
 }
 
 const ACTIONS = {
@@ -17,7 +18,8 @@ const ACTIONS = {
   DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS',
   OPEN_MODAL: 'OPEN_MODAL',
   CLOSE_MODAL: 'CLOSE_MODAL',
-  GET_PHOTOS_BY_TOPICS: 'GET_PHOTOS_BY_TOPICS'
+  GET_PHOTOS_BY_TOPICS: 'GET_PHOTOS_BY_TOPICS',
+  DISPLAY_FAVORITE_PHOTOS: 'DISPLAY_FAVORITE_PHOTOS'
 }
 
 function reducer(state, action) {
@@ -53,6 +55,11 @@ function reducer(state, action) {
         topicData: action.payload
       }
     case ACTIONS.GET_PHOTOS_BY_TOPICS:
+      return {
+        ...state,
+        photoData: action.payload
+      }
+    case ACTIONS.DISPLAY_FAVORITE_PHOTOS:
       return {
         ...state,
         photoData: action.payload
@@ -99,7 +106,16 @@ export const useApplicationData =() => {
     });
   }, [state.selectedPhoto]
   )
-
+  
+  async function returnHome() {
+    try {
+      const response = await axios.get('/api/photos');
+      dispatch({type: ACTIONS.SET_PHOTO_DATA, payload: response.data});
+    } catch (error) {
+      console.error(error);
+    }
+   }
+   
   async function photosByTopic(id) {
     try {
       const response = await axios.get(`/api/topics/photos/${id}`);
@@ -139,11 +155,21 @@ export const useApplicationData =() => {
       }
     }
   }
+
+  function displayFavoritePhotos() {
+    if (state.favorites.length > 0) {
+      const filteredFavorites = state.photoData.filter(photo => state.favorites.includes(photo.id));
+      dispatch({type: ACTIONS.DISPLAY_FAVORITE_PHOTOS, payload: filteredFavorites});
+    }
+  }
+
     
   return { 
     toggleFavorites,
     toggleModal,
     photosByTopic,
+    displayFavoritePhotos,
+    returnHome,
     state
   };
 }

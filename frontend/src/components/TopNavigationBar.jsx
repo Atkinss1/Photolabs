@@ -5,17 +5,18 @@ import FavBadge from './FavBadge';
 
 // Rendering Topics in header
 
-const TopNavigation = ({ topics, favorites, photosByTopic}) => {
+const TopNavigation = ({ topics, favorites, photosByTopic, displayFavoritePhotos, returnHome }) => {
 
   return (
     <div className="top-nav-bar">
       
-      <span className="top-nav-bar__logo">PhotoLabs</span>
+      <span onClick={() => {returnHome()}} className="top-nav-bar__logo">PhotoLabs</span>
       
       <TopicList topics={topics} 
                  photosByTopic={photosByTopic}/>
       
-      <FavBadge favorites={favorites} />
+      <FavBadge favorites={favorites}
+                displayFavoritePhotos={displayFavoritePhotos} />
     
     </div>
   )

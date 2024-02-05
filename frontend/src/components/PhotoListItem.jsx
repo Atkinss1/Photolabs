@@ -6,7 +6,7 @@ import PhotoFavButton from "./PhotoFavButton";
 
 const PhotoListItem = ({ photo, toggleFavorites, favorites, toggleModal, disableBackgroundClick }) => {
 
-  const { id, urls, user, location } = photo;
+  const { id, urls, user, location } = photo
   
   return (
     <div className="photo-list__item">

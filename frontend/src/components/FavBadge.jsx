@@ -5,10 +5,10 @@ import '../styles/FavBadge.scss';
 
 // Rendering Icon dependent on state
 
-const FavBadge = ({ favorites }) => {
+const FavBadge = ({ favorites, displayFavoritePhotos }) => {
   const hasFavorites = favorites.length !== 0;
   return (
-    <div className='fav-badge'>
+    <div onClick={() => {displayFavoritePhotos()}} className='fav-badge'>
       { hasFavorites ?
       (<FavIcon displayAlert={hasFavorites}
                 selected={true}  />) :
