@@ -106,7 +106,7 @@ export const useApplicationData =() => {
 
   useEffect(() => {
     window.scrollTo({
-      top: 100,
+      top: 150,
       behavior: "auto"
     });
   }, [state.selectedPhoto]
@@ -145,7 +145,7 @@ export const useApplicationData =() => {
     }
     
   function toggleModal(props) {
-    console.log('this is props', props)
+    
     if (props === undefined) {
       dispatch({type: ACTIONS.CLOSE_MODAL, payload: false});
       
@@ -158,7 +158,7 @@ export const useApplicationData =() => {
       const selectedPhoto = state.hasFavorites ?  
       ( state.favorites.filter(photo => photo.id === props.id)) :
       ( state.photoData.filter(photo => photo.id === props.id));
-      console.log('selectedPhoto', selectedPhoto[0]);
+      
       dispatch({type: ACTIONS.OPEN_MODAL, payload: selectedPhoto[0]});
 
       // If modal is open, disable scrolling

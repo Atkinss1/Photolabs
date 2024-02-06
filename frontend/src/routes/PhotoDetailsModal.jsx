@@ -6,8 +6,8 @@ import PhotoFavButton from 'components/PhotoFavButton';
 
 // Renders Layout In Modal Window
 
-const PhotoDetailsModal = ({ photos, selectedPhoto, toggleFavorites, favorites, toggleModal }) => {
-  console.log('photomodal selectedPhoto', selectedPhoto);
+const PhotoDetailsModal = ({ photos, selectedPhoto, toggleFavorites, favorites, toggleModal, hasFavorites }) => {
+  
   // Referencing the modal window
   const modalWindowRef = useRef(null);
   
@@ -27,7 +27,7 @@ const PhotoDetailsModal = ({ photos, selectedPhoto, toggleFavorites, favorites, 
     const photoArray = selectedPhoto.similar_photos ? Object.values(selectedPhoto.similar_photos).map((photo) => photo.id) : []
 
     const similarPhotos = photos.filter(photo => photoArray.includes(photo.id));
-
+  
     return (
       <div ref={modalWindowRef} className={'photo-details-modal'}>
 
@@ -64,18 +64,17 @@ const PhotoDetailsModal = ({ photos, selectedPhoto, toggleFavorites, favorites, 
         </div>
               
         <br></br>
-
-        <div className='photo-details-modal__images'>
-          
+        {!hasFavorites ? 
+        (<div className='photo-details-modal__images'>
           <strong>Similar Photos</strong>
           <div>
-          
+
             <PhotoList photos={similarPhotos}
                        favorites={favorites}
                        toggleFavorites={toggleFavorites}
                        toggleModal={toggleModal} />
           </div>
-        </div>
+        </div>) : null }
       </div >
   )
 };

@@ -15,7 +15,7 @@ const App = () => {
           displayFavorites,
           state
         } = useApplicationData();
-        console.log('state.selectedPhoto', state.selectedPhoto);
+        
   return (
     <div className="App">
         <HomeRoute photos={state.hasFavorites ? state.favorites : state.photoData} 
@@ -33,7 +33,8 @@ const App = () => {
                            selectedPhoto={state.selectedPhoto}
                            toggleFavorites={toggleFavorites}
                            favorites={state.favorites}
-                           toggleModal={toggleModal} />}
+                           toggleModal={toggleModal}
+                           hasFavorites={state.hasFavorites} />}
     </div>
   );
 };
