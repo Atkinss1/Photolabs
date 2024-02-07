@@ -27,7 +27,6 @@
   }
 }
 
-
 .photo-details-modal__close-button {
   background: rgba(255, 255, 255, 0.48);
   border-radius: 6px;
@@ -49,6 +48,7 @@
   flex-direction: column;
   margin-left: 3rem;
   margin-top: 8px;
+  
 }
 
 .photo-details-modal__image {
@@ -87,6 +87,7 @@
 .photo-details-modal__photographer-location {
   color: #838383;
 }
+
 .photo-details-modal__photographer-profile {
   object-fit: cover;
   border-radius: 100%;
@@ -100,5 +101,5 @@
   margin-top: 5px;
   font-weight: 700;
   font-size: 12px;
-  margin-left: 8px;
+  margin-left: 8px; 
 }

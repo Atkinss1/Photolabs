@@ -7,7 +7,8 @@ const initialState = {
   selectedPhoto: null,
   displayModal: false ,
   photoData: [],
-  topicData: []
+  topicData: [],
+  isLoading: false,
 }
 
 const ACTIONS = {
@@ -20,7 +21,8 @@ const ACTIONS = {
   CLOSE_MODAL: 'CLOSE_MODAL',
   GET_PHOTOS_BY_TOPICS: 'GET_PHOTOS_BY_TOPICS',
   DISPLAY_FAVORITE_PHOTOS: 'DISPLAY_FAVORITE_PHOTOS',
-  UPDATE_HAS_FAVORITE_STATE: 'UPDATE_HAS_FAVORITE_STATE'
+  UPDATE_HAS_FAVORITE_STATE: 'UPDATE_HAS_FAVORITE_STATE',
+  DATA_LOADING: 'DATA_LOADING'
 }
 
 function reducer(state, action) {
@@ -66,9 +68,15 @@ function reducer(state, action) {
         favorites: action.payload
       }
     case ACTIONS.UPDATE_HAS_FAVORITE_STATE:
-      return {...state,
+      return {
+        ...state,
       hasFavorites: action.payload
     }
+    case ACTIONS.DATA_LOADING:
+      return {
+        ...state,
+        isLoading: action.payload
+      }
       default:
         throw new Error(
           `Tried to reduce with unsupported action type: ${action.type}`
@@ -85,6 +93,7 @@ export const useApplicationData =() => {
       try {
         const response = await axios.get('/api/photos');
         dispatch({type: ACTIONS.SET_PHOTO_DATA, payload: response.data});
+        dispatch({type:ACTIONS.DATA_LOADING, payload: true});
       } catch (error) {
         console.error(error);
       }
@@ -113,7 +122,9 @@ export const useApplicationData =() => {
   )
   
   async function returnHome() {
+    dispatch({type: ACTIONS.DATA_LOADING, payload: false});
     try {
+      dispatch({type: ACTIONS.DATA_LOADING, payload: true});
       const response = await axios.get('/api/photos');
       dispatch({type: ACTIONS.SET_PHOTO_DATA, payload: response.data});
       dispatch({type: ACTIONS.UPDATE_HAS_FAVORITE_STATE, payload: false});
@@ -123,7 +134,9 @@ export const useApplicationData =() => {
    }
    
   async function photosByTopic(id) {
+    dispatch({type: ACTIONS.DATA_LOADING, payload: false});
     try {
+      dispatch({type: ACTIONS.DATA_LOADING, payload: true});
       const response = await axios.get(`/api/topics/photos/${id}`);
       dispatch({type: ACTIONS.GET_PHOTOS_BY_TOPICS, payload: response.data});   
     }
