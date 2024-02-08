@@ -1,5 +1,6 @@
 import { useReducer, useEffect, useRef } from "react";
 import axios from "axios";
+import { isCompositeComponent } from "react-dom/test-utils";
 
 const initialState = {
   favorites: [],
@@ -133,13 +134,15 @@ export const useApplicationData =() => {
   }
   
   function toggleFavorites(photo) {
-
-      if (state.favorites.includes(photo)) {
+    const isFavorite = state.favorites.some((favorite) => favorite.id === photo.id);
+       if (isFavorite) {
         dispatch({type: ACTIONS.FAV_PHOTO_REMOVED, payload: photo});
         if (state.favorites.length <= 1) {
           dispatch({type: ACTIONS.UPDATE_HAS_FAVORITE_STATE, payload: false});
         }
       } else {
+
+        console.log('this is toggleFavorites', isFavorite);
         dispatch({type: ACTIONS.FAV_PHOTO_ADDED, payload: photo});
       }
     }
